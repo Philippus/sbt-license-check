@@ -1,4 +1,4 @@
-# Sbt-licencias
+# sbt-licencias
 
 [![build](https://github.com/Philippus/sbt-licencias/workflows/build/badge.svg)](https://github.com/Philippus/sbt-licencias/actions/workflows/scala.yml?query=workflow%3Abuild+branch%3Amain)
 [![codecov](https://codecov.io/gh/Philippus/sbt-licencias/branch/master/graph/badge.svg)](https://codecov.io/gh/Philippus/sbt-licencias)
