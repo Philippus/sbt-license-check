@@ -11,15 +11,11 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        scala-version: [2.12.14]
-        java-version: [8]
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDK ${{ matrix.java-version }}
-        uses: actions/setup-java@v1
+      - uses: actions/checkout@v2.3.4
+      - uses: olafurpg/setup-scala@v13
         with:
-          java-version: ${{ matrix.java-version }}
+          scala-version: "2.12.14"
+          java-version: "adopt@1.8"
       - name: Run tests
         run: sbt ++${{ matrix.scala-version }} clean test
