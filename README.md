@@ -8,7 +8,7 @@
 This plugin reports the licenses used in your sbt project. It is a limited version of the no-longer maintained
 [sbt-licence-report](https://github.com/sbt/sbt-license-report).
 
-Add the moment it has only one command `licenciasReport` which returns a tree of dependencies along with the licenses
+At the moment it has only one command `licenciasReport` which returns a tree of dependencies along with the licenses
 found, grouped by organization. If a dependency has no licence, or it cannot be found it returns `no licence
 specified`. Setting `useCoursier` to `false` before running the command yields in some cases different/better results. 
 
