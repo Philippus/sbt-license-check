@@ -72,7 +72,7 @@ sbt:scala-isbn> licenciasReport
 ```
 
 ## Resources
-- [sbt-licence-report](https://github.com/sbt/sbt-license-report)
+- [sbt-license-report](https://github.com/sbt/sbt-license-report)
 
 ## License
 The code is available under the [Mozilla Public License, version 2.0](LICENSE).
