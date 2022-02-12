@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/License-MPL%202.0-blue.svg?style=flat "MPL 2.0")](LICENSE)
 
 This plugin reports the licenses used in your sbt project. It is a limited version of the no-longer maintained
-[sbt-licence-report](https://github.com/sbt/sbt-license-report).
+[sbt-license-report](https://github.com/sbt/sbt-license-report).
 
 At the moment it has only one command `licenciasReport` which returns a tree of dependencies along with the licenses
 found, grouped by organization. If a dependency has no licence, or it cannot be found it returns `no licence
