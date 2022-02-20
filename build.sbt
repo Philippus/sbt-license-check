@@ -24,3 +24,9 @@ Compile / packageBin / packageOptions += Package.ManifestAttributes(
 )
 
 scalacOptions += "-deprecation"
+
+scriptedLaunchOpts := {
+  scriptedLaunchOpts.value ++ Seq("-Xmx1024M", "-Dplugin.version=" + version.value)
+}
+
+scriptedBufferLog := false
