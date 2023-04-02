@@ -19,7 +19,7 @@ To find out the license(s) of the current project itself, the sbt command `licen
 sbt-licencias is published for sbt 1.3.0 and above. To start using it add the following to your `plugins.sbt`:
 
 ```
-addSbtPlugin("nl.gn0s1s" % "sbt-licencias" % "0.1.0")
+addSbtPlugin("nl.gn0s1s" % "sbt-licencias" % "0.0.1")
 ```
 
 ## Example usage
