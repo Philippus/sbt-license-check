@@ -1,14 +1,13 @@
-# sbt-licencias
+# sbt-license-check
 
-[![build](https://github.com/Philippus/sbt-licencias/workflows/build/badge.svg)](https://github.com/Philippus/sbt-licencias/actions/workflows/scala.yml?query=workflow%3Abuild+branch%3Amain)
+[![build](https://github.com/Philippus/sbt-license-check/workflows/build/badge.svg)](https://github.com/Philippus/sbt-license-check/actions/workflows/scala.yml?query=workflow%3Abuild+branch%3Amain)
 ![Current Version](https://img.shields.io/badge/version-0.0.1-brightgreen.svg?style=flat "0.0.1")
 [![Scala Steward badge](https://img.shields.io/badge/Scala_Steward-helping-blue.svg?style=flat&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAMAAAARSr4IAAAAVFBMVEUAAACHjojlOy5NWlrKzcYRKjGFjIbp293YycuLa3pYY2LSqql4f3pCUFTgSjNodYRmcXUsPD/NTTbjRS+2jomhgnzNc223cGvZS0HaSD0XLjbaSjElhIr+AAAAAXRSTlMAQObYZgAAAHlJREFUCNdNyosOwyAIhWHAQS1Vt7a77/3fcxxdmv0xwmckutAR1nkm4ggbyEcg/wWmlGLDAA3oL50xi6fk5ffZ3E2E3QfZDCcCN2YtbEWZt+Drc6u6rlqv7Uk0LdKqqr5rk2UCRXOk0vmQKGfc94nOJyQjouF9H/wCc9gECEYfONoAAAAASUVORK5CYII=)](https://scala-steward.org)
 [![License](https://img.shields.io/badge/License-MPL%202.0-blue.svg?style=flat "MPL 2.0")](LICENSE)
 
-This plugin reports the licenses used in your sbt project. It is a limited version of the no-longer maintained
-[sbt-license-report](https://github.com/sbt/sbt-license-report).
+This plugin can check and report the licenses used in your sbt project.
 
-At the moment it has only one command `licenciasReport` which returns a tree of dependencies along with the licenses
+At the moment it has only one command `licenseCheckReport` which returns a tree of dependencies along with the licenses
 found, grouped by organization. If a dependency has no licence, or it cannot be found it returns `no licence
 specified`. Setting `useCoursier` to `false` before running the command yields in some cases different/better results. 
 
@@ -16,10 +15,10 @@ To find out the license(s) of the current project itself, the sbt command `licen
 
 ## Installation
 
-sbt-licencias is published for sbt 1.3.0 and above. To start using it add the following to your `plugins.sbt`:
+sbt-license-check is published for sbt 1.3.0 and above. To start using it add the following to your `plugins.sbt`:
 
 ```
-addSbtPlugin("nl.gn0s1s" % "sbt-licencias" % "0.0.1")
+addSbtPlugin("nl.gn0s1s" % "sbt-license-check" % "0.0.1")
 ```
 
 ## Example usage
@@ -32,7 +31,7 @@ sbt:scala-isbn> set useCoursier := false
 [info]  Run `last` for details.
 [info] Reapplying settings...
 [info] set current project to scala-isbn (in build ***)
-sbt:scala-isbn> licenciasReport
+sbt:scala-isbn> licenseCheckReport
 [info] org.scala-lang
 [info]   +-scala-library:2.13.8
 [info]   | +-Apache-2.0 - https://www.apache.org/licenses/LICENSE-2.0
@@ -70,9 +69,6 @@ sbt:scala-isbn> licenciasReport
 [info]   +-hamcrest-core:1.3
 [info]   | +-New BSD License - http://www.opensource.org/licenses/bsd-license.php
 ```
-
-## Resources
-- [sbt-license-report](https://github.com/sbt/sbt-license-report)
 
 ## License
 The code is available under the [Mozilla Public License, version 2.0](LICENSE).

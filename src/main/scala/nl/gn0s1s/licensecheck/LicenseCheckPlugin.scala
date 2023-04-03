@@ -1,21 +1,21 @@
-package nl.gn0s1s.licenciasplugin
+package nl.gn0s1s.licensecheck
 
 import sbt._
 import Keys._
 
-object LicenciasPlugin extends AutoPlugin {
+object LicenseCheckPlugin extends AutoPlugin {
   case class License(name: String, url: Option[String])
   case class Dependency(organization: String, name: String, revision: String, licenses: Seq[License])
 
   override def trigger = allRequirements
 
   object autoImport {
-    val licenciasReport = taskKey[Unit]("generate license report")
+    val licenseCheckReport = taskKey[Unit]("generate license report")
   }
 
   import autoImport._
   override lazy val projectSettings: Seq[Setting[_]] = Seq(
-    licenciasReport := {
+    licenseCheckReport := {
       val licenses = sbt.Keys.updateFull.value.configurations.flatMap { configuration =>
         configuration.details.flatMap { detail =>
           detail.modules.filterNot(_.evicted).map { module =>
