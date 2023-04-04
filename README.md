@@ -5,13 +5,8 @@
 [![Scala Steward badge](https://img.shields.io/badge/Scala_Steward-helping-blue.svg?style=flat&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAMAAAARSr4IAAAAVFBMVEUAAACHjojlOy5NWlrKzcYRKjGFjIbp293YycuLa3pYY2LSqql4f3pCUFTgSjNodYRmcXUsPD/NTTbjRS+2jomhgnzNc223cGvZS0HaSD0XLjbaSjElhIr+AAAAAXRSTlMAQObYZgAAAHlJREFUCNdNyosOwyAIhWHAQS1Vt7a77/3fcxxdmv0xwmckutAR1nkm4ggbyEcg/wWmlGLDAA3oL50xi6fk5ffZ3E2E3QfZDCcCN2YtbEWZt+Drc6u6rlqv7Uk0LdKqqr5rk2UCRXOk0vmQKGfc94nOJyQjouF9H/wCc9gECEYfONoAAAAASUVORK5CYII=)](https://scala-steward.org)
 [![License](https://img.shields.io/badge/License-MPL%202.0-blue.svg?style=flat "MPL 2.0")](LICENSE)
 
-This plugin can check and report the licenses used in your sbt project.
-
-At the moment it has only one command `licenseCheckReport` which returns a tree of dependencies along with the licenses
-found, grouped by organization. If a dependency has no licence, or it cannot be found it returns `no licence
-specified`. Setting `useCoursier` to `false` before running the command yields in some cases different/better results. 
-
-To find out the license(s) of the current project itself, the sbt command `licenses` can be used.
+This plugin can check and report the licenses used in your sbt project. You can use it also as part of your build chain
+and make the build fail if disallowed licenses are found.
 
 ## Installation
 
@@ -20,6 +15,23 @@ sbt-license-check is published for sbt 1.3.0 and above. To start using it add th
 ```
 addSbtPlugin("nl.gn0s1s" % "sbt-license-check" % "0.0.1")
 ```
+
+## Usage
+### Tasks
+| Task         | Description                                                                                                                                                                                                                                                                                                 | Command                  |
+|:-------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------|
+| licenseCheck | Runs license check. Logs a tree of dependencies along with the licenses found, grouped by organization. If a dependency has no license, or it cannot be found it returns `no license specified`. Setting `useCoursier` to `false` before running the command yields in some cases different/better results. | ```$ sbt licenseCheck``` |
+
+To find out the license(s) of the current project itself, the sbt command `licenses` can be used.
+
+### Configuration
+You can configure the configuration in your `build.sbt` file.
+
+| Setting                                  | Description                                                                                                                                                                   | Default Value |
+|:-----------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------|
+| licenseCheckFailBuildOnDisallowedLicense | Sets whether disallowed licenses fail the build, if `false` disallowed licenses show up as warnings in the log, if `true` they show up as errors.                             | false         |
+| licenseCheckDisallowedLicenses           | Sets the disallowed licenses, e.g. `Seq("Apache 2.0")`.                                                                                                                       | Nil           |
+| licenseCheckExemptedDependencies         | Sequence of dependency names and revisions whose licenses will be allowed regardless of the `licenseCheckDisallowedLicenses` setting, e.g. `Seq(("scala-xml_2.13", "2.0.1"))` | Nil           |
 
 ## Example usage
 
@@ -31,7 +43,7 @@ sbt:scala-isbn> set useCoursier := false
 [info]  Run `last` for details.
 [info] Reapplying settings...
 [info] set current project to scala-isbn (in build ***)
-sbt:scala-isbn> licenseCheckReport
+sbt:scala-isbn> licenseCheck
 [info] org.scala-lang
 [info]   +-scala-library:2.13.8
 [info]   | +-Apache-2.0 - https://www.apache.org/licenses/LICENSE-2.0
