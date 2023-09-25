@@ -12,8 +12,8 @@ object LicenseCheckPlugin extends AutoPlugin {
   object autoImport {
     lazy val licenseCheckFailBuildOnDisallowedLicense =
       settingKey[Boolean]("Sets whether disallowed licenses fail the build")
-    lazy val licenseCheckDisallowedLicenses = settingKey[Seq[String]]("Sets the disallowed licenses")
-    lazy val licenseCheckExemptedDependencies =
+    lazy val licenseCheckDisallowedLicenses           = settingKey[Seq[String]]("Sets the disallowed licenses")
+    lazy val licenseCheckExemptedDependencies         =
       settingKey[Seq[(String, String)]]("Sequence of dependency names and revisions whose licenses will be allowed")
 
     lazy val licenseCheck = taskKey[Unit]("Runs license check")
@@ -23,8 +23,8 @@ object LicenseCheckPlugin extends AutoPlugin {
 
   override lazy val globalSettings = Seq(
     licenseCheckFailBuildOnDisallowedLicense := false,
-    licenseCheckDisallowedLicenses := Seq.empty[String],
-    licenseCheckExemptedDependencies := Seq.empty[(String, String)]
+    licenseCheckDisallowedLicenses           := Seq.empty[String],
+    licenseCheckExemptedDependencies         := Seq.empty[(String, String)]
   )
 
   override lazy val projectSettings: Seq[Setting[_]] = Seq(
@@ -43,13 +43,13 @@ object LicenseCheckPlugin extends AutoPlugin {
       }
 
       var throwOnDisallowedLicense = false
-      val s = streams.value
+      val s                        = streams.value
       licenses.distinct.groupBy(_.organization).foreach { groupedDependencies =>
         s.log.info(groupedDependencies._1)
         groupedDependencies._2.foreach { dependency =>
           s.log.info(s"  +-${dependency.name}:${dependency.revision}")
           dependency.licenses match {
-            case Nil =>
+            case Nil      =>
               s.log.info("  | +-no license specified")
             case licenses =>
               licenses.foreach { license =>

@@ -1,7 +1,7 @@
-name := "sbt-license-check"
+name         := "sbt-license-check"
 organization := "nl.gn0s1s"
-startYear := Some(2022)
-homepage := Some(url("https://github.com/philippus/sbt-license-check"))
+startYear    := Some(2022)
+homepage     := Some(url("https://github.com/philippus/sbt-license-check"))
 licenses += ("MPL-2.0", url("https://www.mozilla.org/MPL/2.0/"))
 
 developers := List(
@@ -14,7 +14,7 @@ developers := List(
 )
 
 enablePlugins(SbtPlugin)
-sbtPlugin := true
+sbtPlugin                     := true
 pluginCrossBuild / sbtVersion := "1.3.0" // minimum version we target
 
 versionScheme := Some("semver-spec")
