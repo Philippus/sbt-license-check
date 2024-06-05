@@ -14,7 +14,6 @@ developers := List(
 )
 
 enablePlugins(SbtPlugin)
-sbtPlugin                     := true
 pluginCrossBuild / sbtVersion := "1.3.0" // minimum version we target
 
 versionScheme := Some("semver-spec")
