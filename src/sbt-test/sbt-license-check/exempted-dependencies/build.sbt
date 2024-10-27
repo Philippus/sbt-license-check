@@ -1,13 +1,10 @@
 version := "0.1"
 
-useCoursier := false
-
 licenseCheckFailBuildOnDisallowedLicense := false
-licenseCheckDisallowedLicenses           := Seq("Apache-2.0")
+licenseCheckDisallowedLicenses           := Seq("The BSD License", "The MIT License")
 licenseCheckExemptedDependencies         := Seq(
-  ("scala-library", "2.12.8"),
-  ("scala-compiler", "2.12.8"),
-  ("scala-reflect", "2.12.8")
+  ("jline", "2.14.6"),
+  ("jsoup", "1.17.2")
 )
 
 TaskKey[Unit]("check")                   := {

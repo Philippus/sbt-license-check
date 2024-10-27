@@ -1,7 +1,5 @@
 version := "0.1"
 
-useCoursier := false
-
 TaskKey[Unit]("check") := {
   val lastLog: File = BuiltinCommands.lastLogFile(state.value).get
   val last: String  = IO.read(lastLog)
