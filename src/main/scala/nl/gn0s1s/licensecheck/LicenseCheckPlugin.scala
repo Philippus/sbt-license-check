@@ -1,7 +1,7 @@
 package nl.gn0s1s.licensecheck
 
-import sbt._
-import Keys._
+import sbt.*
+import Keys.*
 
 object LicenseCheckPlugin extends AutoPlugin {
   case class License(name: String, url: Option[String])
@@ -27,49 +27,54 @@ object LicenseCheckPlugin extends AutoPlugin {
     licenseCheckExemptedDependencies         := Seq.empty[(String, String)]
   )
 
-  override lazy val projectSettings: Seq[Setting[_]] = Seq(
-    licenseCheck := {
-      val licenses = sbt.Keys.updateFull.value.configurations.flatMap { configuration =>
-        configuration.details.flatMap { detail =>
-          detail.modules.filterNot(_.evicted).map { module =>
-            Dependency(
-              module.module.organization,
-              module.module.name,
-              module.module.revision,
-              module.licenses.map(x => License(x._1, x._2))
-            )
+  override lazy val projectSettings: Seq[Setting[_]] = {
+    import nl.gn0s1s.licensecheck.Compat.*
+    Seq(
+      licenseCheck := Def.uncached {
+        val licenses = sbt.Keys.updateFull.value.configurations.flatMap { configuration =>
+          configuration.details.flatMap { detail =>
+            detail.modules.filterNot(_.evicted).map { module =>
+              Dependency(
+                module.module.organization,
+                module.module.name,
+                module.module.revision,
+                module.licenses.map(x => License(x._1, x._2))
+              )
+            }
           }
         }
-      }
 
-      var throwOnDisallowedLicense = false
-      val s                        = streams.value
-      licenses.distinct.groupBy(_.organization).foreach { groupedDependencies =>
-        s.log.info(groupedDependencies._1)
-        groupedDependencies._2.foreach { dependency =>
-          s.log.info(s"  +-${dependency.name}:${dependency.revision}")
-          dependency.licenses match {
-            case Nil      =>
-              s.log.info("  | +-no license specified")
-            case licenses =>
-              licenses.foreach { license =>
-                if (
-                  licenseCheckDisallowedLicenses.value.contains(license.name) && !licenseCheckExemptedDependencies.value
-                    .contains((dependency.name, dependency.revision))
-                )
-                  if (licenseCheckFailBuildOnDisallowedLicense.value) {
-                    throwOnDisallowedLicense = true
-                    s.log.error(s"  | +-${license.name} - ${license.url.getOrElse("")}")
-                  } else
-                    s.log.warn(s"  | +-${license.name} - ${license.url.getOrElse("")}")
-                else
-                  s.log.info(s"  | +-${license.name} - ${license.url.getOrElse("")}")
-              }
+        var throwOnDisallowedLicense = false
+        val s                        = streams.value
+        licenses.distinct.groupBy(_.organization).foreach { groupedDependencies =>
+          s.log.info(groupedDependencies._1)
+          groupedDependencies._2.foreach { dependency =>
+            s.log.info(s"  +-${dependency.name}:${dependency.revision}")
+            dependency.licenses match {
+              case Nil      =>
+                s.log.info("  | +-no license specified")
+              case licenses =>
+                licenses.foreach { license =>
+                  if (
+                    licenseCheckDisallowedLicenses.value.contains(
+                      license.name
+                    ) && !licenseCheckExemptedDependencies.value
+                      .contains((dependency.name, dependency.revision))
+                  )
+                    if (licenseCheckFailBuildOnDisallowedLicense.value) {
+                      throwOnDisallowedLicense = true
+                      s.log.error(s"  | +-${license.name} - ${license.url.getOrElse("")}")
+                    } else
+                      s.log.warn(s"  | +-${license.name} - ${license.url.getOrElse("")}")
+                  else
+                    s.log.info(s"  | +-${license.name} - ${license.url.getOrElse("")}")
+                }
+            }
           }
         }
+        if (throwOnDisallowedLicense)
+          throw DisallowedLicenseException
       }
-      if (throwOnDisallowedLicense)
-        throw DisallowedLicenseException
-    }
-  )
+    )
+  }
 }
