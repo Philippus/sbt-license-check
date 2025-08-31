@@ -1,7 +1,7 @@
 # sbt-license-check
 
 [![build](https://github.com/Philippus/sbt-license-check/workflows/build/badge.svg)](https://github.com/Philippus/sbt-license-check/actions/workflows/scala.yml?query=workflow%3Abuild+branch%3Amain)
-![Current Version](https://img.shields.io/badge/version-0.0.5-brightgreen.svg?style=flat "0.0.5")
+![Current Version](https://img.shields.io/badge/version-0.0.6-brightgreen.svg?style=flat "0.0.6")
 [![Scala Steward badge](https://img.shields.io/badge/Scala_Steward-helping-blue.svg?style=flat&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAQCAMAAAARSr4IAAAAVFBMVEUAAACHjojlOy5NWlrKzcYRKjGFjIbp293YycuLa3pYY2LSqql4f3pCUFTgSjNodYRmcXUsPD/NTTbjRS+2jomhgnzNc223cGvZS0HaSD0XLjbaSjElhIr+AAAAAXRSTlMAQObYZgAAAHlJREFUCNdNyosOwyAIhWHAQS1Vt7a77/3fcxxdmv0xwmckutAR1nkm4ggbyEcg/wWmlGLDAA3oL50xi6fk5ffZ3E2E3QfZDCcCN2YtbEWZt+Drc6u6rlqv7Uk0LdKqqr5rk2UCRXOk0vmQKGfc94nOJyQjouF9H/wCc9gECEYfONoAAAAASUVORK5CYII=)](https://scala-steward.org)
 [![License](https://img.shields.io/badge/License-MPL%202.0-blue.svg?style=flat "MPL 2.0")](LICENSE)
 
@@ -13,7 +13,7 @@ and make the build fail if disallowed licenses are found.
 sbt-license-check is published for sbt 1.5.8 and above. To start using it add the following to your `plugins.sbt`:
 
 ```
-addSbtPlugin("nl.gn0s1s" % "sbt-license-check" % "0.0.5")
+addSbtPlugin("nl.gn0s1s" % "sbt-license-check" % "0.0.6")
 ```
 
 ## Usage
