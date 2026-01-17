@@ -58,7 +58,8 @@ object LicenseCheckPlugin extends AutoPlugin {
                   if (
                     licenseCheckDisallowedLicenses.value.contains(
                       license.name
-                    ) && !licenseCheckExemptedDependencies.value
+                    ) &&
+                    !licenseCheckExemptedDependencies.value
                       .contains((dependency.name, dependency.revision))
                   )
                     if (licenseCheckFailBuildOnDisallowedLicense.value) {
