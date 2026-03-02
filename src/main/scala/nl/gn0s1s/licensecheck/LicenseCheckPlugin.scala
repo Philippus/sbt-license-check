@@ -28,7 +28,7 @@ object LicenseCheckPlugin extends AutoPlugin {
   )
 
   override lazy val projectSettings: Seq[Setting[_]] = {
-    import nl.gn0s1s.licensecheck.Compat.*
+    import sbtcompat.PluginCompat.*
     Seq(
       licenseCheck := Def.uncached {
         val licenses = sbt.Keys.updateFull.value.configurations.flatMap { configuration =>
