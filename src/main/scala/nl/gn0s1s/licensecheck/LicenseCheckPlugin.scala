@@ -16,7 +16,7 @@ object LicenseCheckPlugin extends AutoPlugin {
     lazy val licenseCheckExemptedDependencies         =
       settingKey[Seq[(String, String)]]("Sequence of dependency names and revisions whose licenses will be allowed")
 
-    lazy val licenseCheck = taskKey[Unit]("Runs license check")
+    @transient lazy val licenseCheck = taskKey[Unit]("Runs license check")
   }
 
   import autoImport._
@@ -28,9 +28,8 @@ object LicenseCheckPlugin extends AutoPlugin {
   )
 
   override lazy val projectSettings: Seq[Setting[_]] = {
-    import sbtcompat.PluginCompat.*
     Seq(
-      licenseCheck := Def.uncached {
+      licenseCheck := {
         val licenses = sbt.Keys.updateFull.value.configurations.flatMap { configuration =>
           configuration.details.flatMap { detail =>
             detail.modules.filterNot(_.evicted).map { module =>
