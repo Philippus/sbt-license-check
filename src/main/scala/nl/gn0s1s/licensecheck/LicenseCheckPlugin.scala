@@ -27,7 +27,7 @@ object LicenseCheckPlugin extends AutoPlugin {
     licenseCheckExemptedDependencies         := Seq.empty[(String, String)]
   )
 
-  override lazy val projectSettings: Seq[Setting[_]] = {
+  override lazy val projectSettings: Seq[Setting[?]] = {
     Seq(
       licenseCheck := {
         val licenses = sbt.Keys.updateFull.value.configurations.flatMap { configuration =>
